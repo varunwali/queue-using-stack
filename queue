@@ -1,0 +1,45 @@
+class MyQueue {
+    Stack<Integer> stackNewest,stackOldest;
+
+    public MyQueue() {
+        stackNewest = new Stack<Integer>();
+        stackOldest = new Stack<Integer>();
+    }
+    
+    public void push(int x) {
+        stackNewest.push(x);
+    }
+
+    private void shiftstacks(){
+        if(stackOldest.isEmpty()){
+            while(!stackNewest.isEmpty()){
+                int  poppedOut = stackNewest.pop();
+                stackOldest.push(poppedOut);
+            }
+        }
+    }
+    
+    public int pop() {
+        shiftstacks();
+        return stackOldest.pop();
+    }
+    
+    public int peek() {
+        shiftstacks();
+        return stackOldest.peek();
+    }
+    
+    public boolean empty() {
+        shiftstacks();
+     return stackOldest.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
